@@ -1,0 +1,15 @@
+{
+    "name": "classroomtechtools/wordpress-bulk-creation",
+    "authors": [
+        {
+            "name": "Anthony Kuske",
+            "email": "anthonykuske@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "ClassroomTechTools\\WordpressBulkCreation\\": "src"
+        }
+    }
+}
