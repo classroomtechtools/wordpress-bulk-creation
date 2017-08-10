@@ -57,8 +57,6 @@ class ScriptGenerator
         $blogUrl = $this->config->getWordpressUrl().$username;
         $firstPostPath = dirname(__DIR__).'/first-post.txt';
 
-        $str = "# {$student->getLtisUsername()}".PHP_EOL;
-
         $str = "echo {$student->getLtisUsername()}".PHP_EOL;
 
         $str .= "{$wpcli} blog create --slug='lilaisabellealice48313' --title='{$blogTitle}' --email='{$email}'".PHP_EOL;
