@@ -108,7 +108,7 @@ class ScriptGenerator
         $str .= "{$wpcli} user update {$email} "
             ." --first_name='{$student->getFirstName()}'"
             ." --last_name='{$student->getLastName()}'"
-            ." --display_name='{$student->getFirstName()}".PHP_EOL;
+            ." --display_name='{$student->getFirstName()}'".PHP_EOL;
 
         return $str;
     }
