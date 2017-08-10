@@ -54,8 +54,9 @@ class ScriptGenerator
         $email = $student->getEmail() ?: $student->getStudentNumber().'@mail.ssis-suzhou.net';
 
         $blogTitle = "{$student->getFirstName()} {$student->getLastName()}";
-        $blogUrl = $this->config->getWordpressUrl().$username;
         $blogSlug = $username.$student->getStudentNumber();
+        $blogUrl = $this->config->getWordpressUrl().$blogSlug;
+
         $firstPostPath = dirname(__DIR__).'/first-post.txt';
 
         $str = "echo {$student->getLtisUsername()}".PHP_EOL;
