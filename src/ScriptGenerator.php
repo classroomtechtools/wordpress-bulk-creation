@@ -55,11 +55,12 @@ class ScriptGenerator
 
         $blogTitle = "{$student->getFirstName()} {$student->getLastName()}";
         $blogUrl = $this->config->getWordpressUrl().$username;
+        $blogSlug = $username.$student->getStudentNumber();
         $firstPostPath = dirname(__DIR__).'/first-post.txt';
 
         $str = "echo {$student->getLtisUsername()}".PHP_EOL;
 
-        $str .= "{$wpcli} blog create --slug='lilaisabellealice48313' --title='{$blogTitle}' --email='{$email}'".PHP_EOL;
+        $str .= "{$wpcli} blog create --slug='{$blogSlug}' --title='{$blogTitle}' --email='{$email}'".PHP_EOL;
 
         $commands = [
             "option update blogdescription \"My Blogfolio, My Learning\"",
@@ -98,10 +99,13 @@ class ScriptGenerator
             "option set category_base category",
             "option set tag_base '/tag'",
         ];
-        
+
         foreach ($commands as $command) {
             $str .= "{$wpcli} --url={$blogUrl} {$command}".PHP_EOL;
         }
+
+        // Fix usernames while we're at it.
+        $str .= "{$wpcli} user update {$email} --first_name='{$student->getFirstName()}' --last_name='{$student->getLastName()}' --display_name='{$student->getFirstName()}";
 
         return $str;
     }
