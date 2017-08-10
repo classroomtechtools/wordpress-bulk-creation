@@ -98,8 +98,7 @@ class ScriptGenerator
             "option set category_base category",
             "option set tag_base '/tag'",
         ];
-
-
+        
         foreach ($commands as $command) {
             $str .= "{$wpcli} --url={$blogUrl} {$command}".PHP_EOL;
         }
