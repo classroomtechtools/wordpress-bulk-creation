@@ -13,4 +13,6 @@ $generator = new ScriptGenerator($config);
 
 $students = $input->load();
 
+echo "#!/bin/bash".PHP_EOL;
+echo "set -x".PHP_EOL;
 echo $generator->generateWordpressScriptForStudents($students);
