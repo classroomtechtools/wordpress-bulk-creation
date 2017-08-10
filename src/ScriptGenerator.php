@@ -105,7 +105,10 @@ class ScriptGenerator
         }
 
         // Fix usernames while we're at it.
-        $str .= "{$wpcli} user update {$email} --first_name='{$student->getFirstName()}' --last_name='{$student->getLastName()}' --display_name='{$student->getFirstName()}";
+        $str .= "{$wpcli} user update {$email} "
+            ." --first_name='{$student->getFirstName()}'"
+            ." --last_name='{$student->getLastName()}'"
+            ." --display_name='{$student->getFirstName()}".PHP_EOL;
 
         return $str;
     }
