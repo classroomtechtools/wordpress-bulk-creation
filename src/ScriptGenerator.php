@@ -35,7 +35,7 @@ class ScriptGenerator
     {
         $str = '';
 
-        $createForGrades = [4, 5];
+        $createForGrades = [3, 4, 5];
 
         foreach ($students as $student) {
             if (!in_array($student->getGradeLevel(), $createForGrades)) {
