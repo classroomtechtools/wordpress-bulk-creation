@@ -1,8 +1,10 @@
 <?php
 
 return [
-    'srcFile' => 'students.csv',
+    'studentsInputFile' => __DIR__.'/data/students.csv',
+    'staffInputFile' => __DIR__.'/data/staff.csv',
+    'elementaryScheduleInputFile' => __DIR__.'/data/elementary-schedule.csv',
 
-    'wordpressPath' => '/Users/Anthony/Dropbox/SSIS/portfolios',
-    'wordpressUrl' => 'http://portfolios.ssis-suzhou.net/',
+    'wordpressPath' => '/path/to/wordpress',
+    'wordpressUrl' => 'http://www.mywordpresssite.com/',
 ];
