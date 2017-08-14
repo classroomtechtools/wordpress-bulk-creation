@@ -36,8 +36,16 @@ class Student extends AbstractPerson
      * @param $ltisUsername
      * @param $email
      */
-    public function __construct($powerSchoolId, $gradeLevel, $homeRoom, $lastName, $firstName, $dob, $ltisUsername, $email)
-    {
+    public function __construct(
+        $powerSchoolId,
+        $gradeLevel,
+        $homeRoom,
+        $lastName,
+        $firstName,
+        $dob,
+        $ltisUsername,
+        $email
+    ) {
         $this->powerSchoolId = $powerSchoolId;
         $this->gradeLevel = $gradeLevel;
         $this->homeRoom = $homeRoom;

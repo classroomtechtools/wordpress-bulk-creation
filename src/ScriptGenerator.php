@@ -107,7 +107,6 @@ class ScriptGenerator
             "option set tag_base '/tag'",
         ];
 
-
         $homeRoomTeacher = $this->homeRoomCalculator->getHomeRoomTeacherForStudent($student);
         if ($homeRoomTeacher) {
             $commands[] = "user set-role {$homeRoomTeacher->getEmail()} author";
