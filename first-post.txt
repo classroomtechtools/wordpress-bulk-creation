@@ -1,5 +1,5 @@
 <h1><strong>Hello and welcome to your SSIS <em>Blogfolio</em>!</strong></h1>
-A Blogfolio is a little bit Blog, a little bit Portfolio. It is a place where you can share your SSIS learning and reflections, connect and learn from other people, and practice how to be an effective digital citizen. 🙌🎊🎉
+A Blogfolio is a little bit Blog, a little bit Portfolio. It is a place where you can share your SSIS learning and reflections, connect and learn from other people, and practice how to be an effective digital citizen.
 
 It's exciting! And it's also a responsibility. Together, we'll start a journey to learn how to best use this Blogfolio to enhance and extend your learning.
 
@@ -15,6 +15,6 @@ Please bookmark your blog, and make sure to memorize your username and password.
 
 If you have any problems, please ask your teacher or one of the Learning Technology Coaches.
 
-That's it 👊👍🏻😎
+That's it!
 
 Now, lets learn how to use this thing!
