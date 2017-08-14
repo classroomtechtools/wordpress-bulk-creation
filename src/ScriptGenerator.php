@@ -12,11 +12,18 @@ class ScriptGenerator
     private $config;
 
     /**
-     * @param Config $config
+     * @var HomeRoomCalculator
      */
-    public function __construct(Config $config)
+    private $homeRoomCalculator;
+
+    /**
+     * @param Config $config
+     * @param HomeRoomCalculator $homeRoomCalculator
+     */
+    public function __construct(Config $config, HomeRoomCalculator $homeRoomCalculator)
     {
         $this->config = $config;
+        $this->homeRoomCalculator = $homeRoomCalculator;
     }
 
     /**
@@ -50,22 +57,21 @@ class ScriptGenerator
     {
         $wpcli = $this->getWpCliCommand();
 
-        $username = $student->getLtisUsername();
-        $email = $student->getEmail() ?: $student->getStudentNumber().'@mail.ssis-suzhou.net';
+        $email = $student->getEmail() ?: $student->getPowerSchoolId().'@mail.ssis-suzhou.net';
+        $nameSlug = strtolower(str_replace(' ', '', $student->getFirstName()));
 
         $blogTitle = "{$student->getFirstName()} {$student->getLastName()}";
-        $blogSlug = $username.$student->getStudentNumber();
+        $blogSlug = $nameSlug.$student->getPowerSchoolId();
         $blogUrl = $this->config->getWordpressUrl().$blogSlug;
 
         $firstPostPath = dirname(__DIR__).'/first-post.txt';
 
-        $str = "echo {$student->getLtisUsername()}".PHP_EOL;
+        $str = "echo {$blogSlug}".PHP_EOL;
 
         $str .= "{$wpcli} blog create --slug='{$blogSlug}' --title='{$blogTitle}' --email='{$email}'".PHP_EOL;
 
         $commands = [
             "option update blogdescription \"My Blogfolio, My Learning\"",
-            "user set-role lcssisadmin@student.ssis-suzhou.net author",
             "post create --user=mattives@ssis-suzhou.net --post_title='Welcome to Your Blogfolio' --post_status=publish {$firstPostPath}",
             "post delete 2 --force",
             "post delete 1 --force",
@@ -100,6 +106,12 @@ class ScriptGenerator
             "option set category_base category",
             "option set tag_base '/tag'",
         ];
+
+
+        $homeRoomTeacher = $this->homeRoomCalculator->getHomeRoomTeacherForStudent($student);
+        if ($homeRoomTeacher) {
+            $commands[] = "user set-role {$homeRoomTeacher->getEmail()} author";
+        }
 
         foreach ($commands as $command) {
             $str .= "{$wpcli} --url={$blogUrl} {$command}".PHP_EOL;

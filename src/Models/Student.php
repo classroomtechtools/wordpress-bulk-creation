@@ -2,22 +2,12 @@
 
 namespace ClassroomTechTools\WordpressBulkCreation\Models;
 
-class Student
+class Student extends AbstractPerson
 {
     /**
      * @var string
      */
     private $dob;
-
-    /**
-     * @var string
-     */
-    private $email;
-
-    /**
-     * @var string
-     */
-    private $firstName;
 
     /**
      * @var string
@@ -32,22 +22,12 @@ class Student
     /**
      * @var string
      */
-    private $lastName;
-
-    /**
-     * @var string
-     */
     private $ltisUsername;
-
-    /**
-     * @var string
-     */
-    private $studentNumber;
 
     /**
      * Student constructor.
      *
-     * @param $studentNumber
+     * @param $powerSchoolId
      * @param $gradeLevel
      * @param $homeRoom
      * @param $lastName
@@ -56,9 +36,9 @@ class Student
      * @param $ltisUsername
      * @param $email
      */
-    public function __construct($studentNumber, $gradeLevel, $homeRoom, $lastName, $firstName, $dob, $ltisUsername, $email)
+    public function __construct($powerSchoolId, $gradeLevel, $homeRoom, $lastName, $firstName, $dob, $ltisUsername, $email)
     {
-        $this->studentNumber = $studentNumber;
+        $this->powerSchoolId = $powerSchoolId;
         $this->gradeLevel = $gradeLevel;
         $this->homeRoom = $homeRoom;
         $this->lastName = $lastName;
@@ -74,22 +54,6 @@ class Student
     public function getDob()
     {
         return $this->dob;
-    }
-
-    /**
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFirstName()
-    {
-        return $this->firstName;
     }
 
     /**
@@ -111,25 +75,9 @@ class Student
     /**
      * @return string
      */
-    public function getLastName()
-    {
-        return $this->lastName;
-    }
-
-    /**
-     * @return string
-     */
     public function getLtisUsername()
     {
         return $this->ltisUsername;
-    }
-
-    /**
-     * @return string
-     */
-    public function getStudentNumber()
-    {
-        return $this->studentNumber;
     }
 
     /**

@@ -9,7 +9,17 @@ class Config
     /**
      * @var string
      */
-    private $srcFile;
+    private $staffInputFile;
+
+    /**
+     * @var string
+     */
+    private $studentsInputFile;
+
+    /**
+     * @var string
+     */
+    private $elementaryScheduleInputFile;
 
     /**
      * @var string
@@ -35,7 +45,9 @@ class Config
     {
         // Ensure required values exist.
         $requiredValues = [
-            'srcFile'
+            'studentsInputFile',
+            'staffInputFile',
+            'elementaryScheduleInputFile',
         ];
 
         foreach ($requiredValues as $requiredValue) {
@@ -54,9 +66,25 @@ class Config
     /**
      * @return string
      */
-    public function getSrcFile()
+    public function getStaffInputFile()
     {
-        return $this->srcFile;
+        return $this->staffInputFile;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStudentsInputFile()
+    {
+        return $this->studentsInputFile;
+    }
+
+    /**
+     * @return string
+     */
+    public function getElementaryScheduleInputFile()
+    {
+        return $this->elementaryScheduleInputFile;
     }
 
     /**
