@@ -72,9 +72,9 @@ class ScriptGenerator
 
         $commands = [
             "option update blogdescription \"My Blogfolio, My Learning\"",
-            "post create --user=mattives@ssis-suzhou.net --post_title='Welcome to Your Blogfolio' --post_status=publish {$firstPostPath}",
-            "post delete 2 --force",
-            "post delete 1 --force",
+            //"post create --user=mattives@ssis-suzhou.net --post_title='Welcome to Your Blogfolio' --post_status=publish {$firstPostPath}",
+            //"post delete 2 --force",
+            //"post delete 1 --force",
             "theme activate twentytwelve",
             "theme mod set header_textcolor 515151",
             "theme mod set header_image http://portfolios.ssis-suzhou.net/template/wp-content/uploads/sites/3/2016/08/cropped-image6149.png",
