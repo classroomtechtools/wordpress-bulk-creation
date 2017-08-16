@@ -40,8 +40,14 @@ class ScriptGenerator
         foreach ($students as $student) {
             if (!in_array($student->getGradeLevel(), $createForGrades)) {
                 continue;
-
             }
+
+
+            if ($student->getPowerSchoolId() != '57702') {
+                // For testing
+                continue;
+            }
+
             $str .= $this->generateWordpressScriptForStudent($student);
         }
 
