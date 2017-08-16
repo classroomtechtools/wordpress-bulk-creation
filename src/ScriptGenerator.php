@@ -121,6 +121,7 @@ class ScriptGenerator
             "option set default_category 2",
             "option set category_base category",
             "option set tag_base '/tag'",
+            "wp post create --post_type-page --post_title='Reflection Prompts' ".dirname(__DIR__)."/templates/reflection-prompts.txt",
         ];
 
         $homeRoomTeacher = $this->homeRoomCalculator->getHomeRoomTeacherForStudent($student);
