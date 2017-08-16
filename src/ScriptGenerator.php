@@ -51,6 +51,9 @@ class ScriptGenerator
             $str .= $this->generateWordpressScriptForStudent($student);
         }
 
+        $wpcli = $this->getWpCliCommand();
+        $str .= "{$wpcli} cache flush".PHP_EOL;
+
         return $str;
     }
 
@@ -140,12 +143,17 @@ class ScriptGenerator
             "post term add 1 category Art",
             "post term add 1 category Music",
             "post term add 1 category PE",
+
             "widget deactivate search-2",
-            "widget move categories-2 --position=1",
-            "widget deactivate meta-2",
-            "widget deactivate archives-2",
-            "widget add tag_cloud sidebar-1 2 --title='Post tags' --taxonomy='post_tag'",
-            "widget add s2_form_widget sidebar-1 5 --title='Subscribe to my Blogfolio!' --div=search --size=20",
+
+            "widget move recent-comments-2 --position=1",
+            "widget move recent-posts-2 --position=2",
+            "widget move categories-2 --position=3",
+            "widget add tag_cloud sidebar-1 4 --title='Post tags' --taxonomy='post_tag'",
+            "widget move archives-2 --position=5",
+            //"widget add wpstatistics_widget sidebar-1 6 --name='Statistics'",
+            "widget add s2_form_widget sidebar-1 6 --title='Subscribe to my Blogfolio!' --div=search --size=20",
+            "widget move meta-2 --position=7",
 
             "menu create 'Main Menu'",
             "menu location assign main-menu primary",
