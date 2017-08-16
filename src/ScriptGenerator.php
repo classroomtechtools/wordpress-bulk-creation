@@ -83,11 +83,10 @@ class ScriptGenerator
 
         // Run these commands on every blog.
         $alwaysCommands = [
-            "site option update slug '{$blogSlug}'",
-            "site option update title '{$blogTitle}'",
-            "site option update email '{$email}'",
+            "option update slug '{$blogSlug}'",
+            "option update title '{$blogTitle}'",
+            "option update email '{$email}'",
             "user set-role {$email} editor",
-            "option update blogdescription \"My Blogfolio, My Learning\"",
             "option set akismet_strictness 1",
             "option set comment_moderation 1",
             "option set comment_whitelist 0",
@@ -119,6 +118,8 @@ class ScriptGenerator
 
         // Only run these commands on newly created blogs.
         $newCommands = [
+            "option update blogdescription \"My Blogfolio, My Learning\"",
+
             // Should be post 3
             "post create --post_type='page' --post_title='Reflection Prompts' {$replectionPromptsSrc} --post_status='publish' --post_name='reflection-prompts'",
 
