@@ -145,7 +145,7 @@ class ScriptGenerator
         }
 
         foreach ($newCommands as $command) {
-            $str .= "NEW && {$wpcli} --url={$blogUrl} {$command}".PHP_EOL;
+            $str .= '$NEW'." && {$wpcli} --url={$blogUrl} {$command}".PHP_EOL;
         }
 
         // Fix usernames while we're at it.
