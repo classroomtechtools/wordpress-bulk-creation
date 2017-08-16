@@ -77,13 +77,15 @@ class ScriptGenerator
 
         $str .= "NEW=false;".PHP_EOL;
 
-        $str .= "{$wpcli} blog create --slug='{$blogSlug}' --title='{$blogTitle}' --email='{$email}' && NEW=true".PHP_EOL;
+        $str .= "{$wpcli} site create --slug='{$blogSlug}' --title='{$blogTitle}' --email='{$email}' && NEW=true".PHP_EOL;
 
         $str .= 'echo $NEW'.PHP_EOL;
 
         // Run these commands on every blog.
         $alwaysCommands = [
-            "blog update --slug='{$blogSlug}' --title='{$blogTitle}' --email='{$email}'",
+            "site option update slug '{$blogSlug}'",
+            "site option update title '{$blogTitle}'",
+            "site option update email '{$email}'",
             "user set-role {$email} editor",
             "option update blogdescription \"My Blogfolio, My Learning\"",
             "option set akismet_strictness 1",
