@@ -66,7 +66,7 @@ class ScriptGenerator
 
         $firstPostPath = dirname(__DIR__).'/first-post.txt';
 
-        $str = "echo {$blogSlug}".PHP_EOL;
+        $str = "echo {$blogSlug} {$student->getHomeRoom()} {$student->getLtisUsername()}".PHP_EOL;
 
         $str .= "{$wpcli} blog create --slug='{$blogSlug}' --title='{$blogTitle}' --email='{$email}'".PHP_EOL;
 
