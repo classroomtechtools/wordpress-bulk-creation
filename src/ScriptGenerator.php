@@ -78,23 +78,15 @@ class ScriptGenerator
 
         $str .= 'echo $NEW'.PHP_EOL;
 
-        $headerImageUrl = 'https://portfolios.ssis-suzhou.net/adam99999/wp-content/uploads/sites/11/2017/08/cropped-DJI_0002.jpg';
-        $headerImageData = [
-            "attachment_id" => 12,
-            "url" => $headerImageUrl,
-            "thumbnail_url" => $headerImageUrl,
-            "height" => 215,
-            "width" => 825,
-        ];
-
         // Run these commands on every blog.
         $alwaysCommands = [
+            "user set-role {$email} editor",
             "option update blogdescription \"My Blogfolio, My Learning\"",
             "option set akismet_strictness 1",
             "option set comment_moderation 1",
             "option set comment_whitelist 0",
             "option set moderation_notify 0",
-            "option set comments_notify 0",
+            "option set comments_notify 1",
             "option set default_category 2",
             "option set category_base category",
             "option set tag_base '/tag'",
@@ -108,12 +100,29 @@ class ScriptGenerator
 
         $replectionPromptsSrc = dirname(__DIR__)."/templates/reflection-prompts.txt";
 
+        $headerImageUrl = 'https://portfolios.ssis-suzhou.net/adam99999/wp-content/uploads/sites/11/2017/08/cropped-DJI_0002.jpg';
+        $headerImageData = [
+            "attachment_id" => 12,
+            "url" => $headerImageUrl,
+            "thumbnail_url" => $headerImageUrl,
+            "height" => 215,
+            "width" => 825,
+        ];
+
+        $responsibleUseUrl = 'https://dragonnet.ssis-suzhou.net/pluginfile.php/211543/mod_label/intro/Responsible%20Use%20-%20PYP%20Student%20Agreement.pdf';
+
         // Only run these commands on newly created blogs.
         $newCommands = [
+            // Should be post 3
+            "post create --post_type-page --post_title='Reflection Prompts' {$replectionPromptsSrc}",
+
+            // Delete the 'Sample Page'
+            "post delete 2 --force",
+
             // Delete the comment on the first post.
             "comment delete 1 --force",
 
-            // Fix the title of the first post.
+            // Fix the title of the first post. Editing this post creates post 4
             "post update 1 --post_title='Welcome to Your Blogfolio' --post_name='welcome-to-your-blogfolio'",
             "post update 1 --user='mattives@mail.ssis-suzhou.net'",
 
@@ -138,7 +147,13 @@ class ScriptGenerator
             "widget deactivate archives-2",
             "widget add tag_cloud sidebar-1 2 --title='Post tags' --taxonomy='post_tag'",
             "widget add s2_form_widget sidebar-1 5 --title='Subscribe to my Blogfolio!' --div=search --size=20",
-            "post create --post_type-page --post_title='Reflection Prompts' {$replectionPromptsSrc}",
+
+            "menu create 'Main Menu'",
+            "menu location assign main-menu primary",
+            "menu item add-custom main-menu Home {$blogUrl}",
+            "menu item add-post main-menu 3", // Add Reflection Prompts link
+            "menu item add-custom main-menu Home {$blogUrl}",
+            "menu item add-custom main-menu 'Responsible Use Policy' {$responsibleUseUrl}",
         ];
 
         foreach ($alwaysCommands as $command) {
