@@ -86,7 +86,7 @@ class ScriptGenerator
             "option set comment_moderation 1",
             "option set comment_whitelist 0",
             "option set moderation_notify 0",
-            "option set comments_notify 1",
+            "option set comments_notify 0",
             "option set default_category 2",
             "option set category_base category",
             "option set tag_base '/tag'",
@@ -114,7 +114,7 @@ class ScriptGenerator
         // Only run these commands on newly created blogs.
         $newCommands = [
             // Should be post 3
-            "post create --post_type-page --post_title='Reflection Prompts' {$replectionPromptsSrc}",
+            "post create --post_type-page --post_title='Reflection Prompts' {$replectionPromptsSrc} --post_status='publish' --post_name='reflection-prompts'",
 
             // Delete the 'Sample Page'
             "post delete 2 --force",
@@ -152,7 +152,6 @@ class ScriptGenerator
             "menu location assign main-menu primary",
             "menu item add-custom main-menu Home {$blogUrl}",
             "menu item add-post main-menu 3", // Add Reflection Prompts link
-            "menu item add-custom main-menu Home {$blogUrl}",
             "menu item add-custom main-menu 'Responsible Use Policy' {$responsibleUseUrl}",
         ];
 
