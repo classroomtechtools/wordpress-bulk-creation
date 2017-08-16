@@ -114,7 +114,7 @@ class ScriptGenerator
         // Only run these commands on newly created blogs.
         $newCommands = [
             // Should be post 3
-            "post create --post_type-page --post_title='Reflection Prompts' {$replectionPromptsSrc} --post_status='publish' --post_name='reflection-prompts'",
+            "post create --post_type='page' --post_title='Reflection Prompts' {$replectionPromptsSrc} --post_status='publish' --post_name='reflection-prompts'",
 
             // Delete the 'Sample Page'
             "post delete 2 --force",
