@@ -74,7 +74,9 @@ class ScriptGenerator
 
         $str = "echo {$blogSlug} {$student->getHomeRoom()} {$student->getLtisUsername()}".PHP_EOL;
 
-        $str .= "{$wpcli} blog create --slug='{$blogSlug}' --title='{$blogTitle}' --email='{$email}'".PHP_EOL;
+        $str = "NEW=false;"
+
+        $str .= "{$wpcli} blog create --slug='{$blogSlug}' --title='{$blogTitle}' --email='{$email}' && NEW=true".PHP_EOL;
 
         $headerImageUrl = 'https://portfolios.ssis-suzhou.net/adam99999/wp-content/uploads/sites/11/2017/08/cropped-DJI_0002.jpg';
         $headerImageData = [
@@ -85,11 +87,32 @@ class ScriptGenerator
             "width" => 825,
         ];
 
-        $commands = [
+        // Run these commands on every blog.
+        $alwaysCommands = [
             "option update blogdescription \"My Blogfolio, My Learning\"",
             //"post create --user=mattives@ssis-suzhou.net --post_title='Welcome to Your Blogfolio' --post_status=publish {$firstPostPath}",
             //"post delete 2 --force",
             //"post delete 1 --force",
+            "option set akismet_strictness 1",
+            "option set comment_moderation 1",
+            "option set comment_whitelist 0",
+            "option set moderation_notify 0",
+            "option set comments_notify 0",
+            "option set default_category 2",
+            "option set category_base category",
+            "option set tag_base '/tag'",
+            "plugin activate subscribe2",
+        ];
+
+      $homeRoomTeacher = $this->homeRoomCalculator->getHomeRoomTeacherForStudent($student);
+        if ($homeRoomTeacher) {
+            $alwaysCommands[] = "user set-role {$homeRoomTeacher->getEmail()} author";
+        }
+
+        $replectionPromptsSrc = dirname(__DIR__)."/templates/reflection-prompts.txt";
+
+        // Only run these commands on newly created blogs.
+        $newCommands = [
             "post update 1 --post_title='Welcome to Your Blogfolio'",
             "theme activate twentytwelve",
             "theme mod set header_textcolor 515151",
@@ -101,7 +124,7 @@ class ScriptGenerator
             "term create category Art",
             "term create category Music",
             "term create category PE",
-            "post term remove 3 category Uncategorized",
+            "post term remove 1 category Uncategorized",
             "post term add 1 category Homeroom",
             "post term add 1 category Art",
             "post term add 1 category Music",
@@ -111,26 +134,16 @@ class ScriptGenerator
             "widget deactivate meta-2",
             "widget deactivate archives-2",
             "widget add tag_cloud sidebar-1 2 --title='Post tags' --taxonomy='post_tag'",
-            "plugin activate subscribe2",
             "widget add s2_form_widget sidebar-1 5 --title='Subscribe to my Blogfolio!' --div=search --size=20",
-            "option set akismet_strictness 1",
-            "option set comment_moderation 1",
-            "option set comment_whitelist 0",
-            "option set moderation_notify 0",
-            "option set comments_notify 0",
-            "option set default_category 2",
-            "option set category_base category",
-            "option set tag_base '/tag'",
-            "wp post create --post_type-page --post_title='Reflection Prompts' ".dirname(__DIR__)."/templates/reflection-prompts.txt",
+            "wp post create --post_type-page --post_title='Reflection Prompts' {$replectionPromptsSrc}",
         ];
 
-        $homeRoomTeacher = $this->homeRoomCalculator->getHomeRoomTeacherForStudent($student);
-        if ($homeRoomTeacher) {
-            $commands[] = "user set-role {$homeRoomTeacher->getEmail()} author";
+        foreach ($alwaysCommands as $command) {
+            $str .= "{$wpcli} --url={$blogUrl} {$command}".PHP_EOL;
         }
 
-        foreach ($commands as $command) {
-            $str .= "{$wpcli} --url={$blogUrl} {$command}".PHP_EOL;
+        foreach ($newCommands as $command) {
+            $str .= "NEW && {$wpcli} --url={$blogUrl} {$command}".PHP_EOL;
         }
 
         // Fix usernames while we're at it.
