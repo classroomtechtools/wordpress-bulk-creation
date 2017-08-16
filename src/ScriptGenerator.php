@@ -124,7 +124,6 @@ class ScriptGenerator
 
             // Fix the title of the first post. Editing this post creates post 4
             "post update 1 --post_title='Welcome to Your Blogfolio' --post_name='welcome-to-your-blogfolio'",
-            "post update 1 --user='mattives@mail.ssis-suzhou.net'",
 
             "theme activate twentytwelve",
             "theme mod set header_textcolor 515151",
