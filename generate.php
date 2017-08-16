@@ -23,3 +23,4 @@ $homeRoomCalculator->setElementarySchedule($elementarySchedule);
 echo "#!/bin/bash".PHP_EOL;
 echo "set -x".PHP_EOL;
 echo $generator->generateWordpressScriptForStudents($students);
+echo "rm -rf /var/www/portfolios/wp-content/cache/supercache/portfolios.ssis-suzhou.net".PHP_EOL;

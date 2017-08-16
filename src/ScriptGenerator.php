@@ -50,10 +50,7 @@ class ScriptGenerator
 
             $str .= $this->generateWordpressScriptForStudent($student);
         }
-
-        $wpcli = $this->getWpCliCommand();
-        $str .= "{$wpcli} cache flush".PHP_EOL;
-
+        
         return $str;
     }
 
