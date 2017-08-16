@@ -50,7 +50,7 @@ class ScriptGenerator
 
             $str .= $this->generateWordpressScriptForStudent($student);
         }
-        
+
         return $str;
     }
 
@@ -80,7 +80,6 @@ class ScriptGenerator
 
         // Run these commands on every blog.
         $alwaysCommands = [
-            "option update slug '{$blogSlug}'",
             "option update blogname '{$blogTitle}'",
             "option update admin_email '{$email}'",
             "user set-role {$email} editor",
