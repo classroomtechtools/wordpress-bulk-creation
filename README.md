@@ -18,6 +18,7 @@ php generate.php > create-blogs.sh
 chmod +x create-blogs.sh
 ./create-blogs.sh
 ```
+Should be run as www-data.
 
 ### Note
 This needs the [wpcli](http://wp-cli.org/) installed.

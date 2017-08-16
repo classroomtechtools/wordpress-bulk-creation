@@ -42,12 +42,6 @@ class ScriptGenerator
                 continue;
             }
 
-
-            if ($student->getPowerSchoolId() != '57702') {
-                // For testing
-                continue;
-            }
-
             $str .= $this->generateWordpressScriptForStudent($student);
         }
 
