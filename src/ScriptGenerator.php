@@ -83,6 +83,7 @@ class ScriptGenerator
 
         // Run these commands on every blog.
         $alwaysCommands = [
+            "blog update --slug='{$blogSlug}' --title='{$blogTitle}' --email='{$email}'",
             "user set-role {$email} editor",
             "option update blogdescription \"My Blogfolio, My Learning\"",
             "option set akismet_strictness 1",
