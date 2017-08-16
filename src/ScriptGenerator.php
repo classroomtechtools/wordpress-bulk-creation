@@ -70,8 +70,6 @@ class ScriptGenerator
         $blogSlug = $nameSlug.$student->getPowerSchoolId();
         $blogUrl = $this->config->getWordpressUrl().$blogSlug;
 
-        $firstPostPath = dirname(__DIR__).'/first-post.txt';
-
         $str = "echo {$blogSlug} {$student->getHomeRoom()} {$student->getLtisUsername()}".PHP_EOL;
 
         $str .= "NEW=false;".PHP_EOL;
@@ -92,9 +90,6 @@ class ScriptGenerator
         // Run these commands on every blog.
         $alwaysCommands = [
             "option update blogdescription \"My Blogfolio, My Learning\"",
-            //"post create --user=mattives@ssis-suzhou.net --post_title='Welcome to Your Blogfolio' --post_status=publish {$firstPostPath}",
-            //"post delete 2 --force",
-            //"post delete 1 --force",
             "option set akismet_strictness 1",
             "option set comment_moderation 1",
             "option set comment_whitelist 0",
@@ -106,7 +101,7 @@ class ScriptGenerator
             "plugin activate subscribe2",
         ];
 
-      $homeRoomTeacher = $this->homeRoomCalculator->getHomeRoomTeacherForStudent($student);
+        $homeRoomTeacher = $this->homeRoomCalculator->getHomeRoomTeacherForStudent($student);
         if ($homeRoomTeacher) {
             $alwaysCommands[] = "user set-role {$homeRoomTeacher->getEmail()} author";
         }
@@ -115,7 +110,13 @@ class ScriptGenerator
 
         // Only run these commands on newly created blogs.
         $newCommands = [
-            "post update 1 --post_title='Welcome to Your Blogfolio'",
+            // Delete the comment on the first post.
+            "comment delete 1 --force",
+
+            // Fix the title of the first post.
+            "post update 1 --post_title='Welcome to Your Blogfolio' --post_name='welcome-to-your-blogfolio'",
+            "post update 1 --user='mattives@mail.ssis-suzhou.net'",
+
             "theme activate twentytwelve",
             "theme mod set header_textcolor 515151",
             "theme mod set header_image '{$headerImageUrl}'",
@@ -137,7 +138,7 @@ class ScriptGenerator
             "widget deactivate archives-2",
             "widget add tag_cloud sidebar-1 2 --title='Post tags' --taxonomy='post_tag'",
             "widget add s2_form_widget sidebar-1 5 --title='Subscribe to my Blogfolio!' --div=search --size=20",
-            "wp post create --post_type-page --post_title='Reflection Prompts' {$replectionPromptsSrc}",
+            "post create --post_type-page --post_title='Reflection Prompts' {$replectionPromptsSrc}",
         ];
 
         foreach ($alwaysCommands as $command) {
