@@ -74,9 +74,11 @@ class ScriptGenerator
 
         $str = "echo {$blogSlug} {$student->getHomeRoom()} {$student->getLtisUsername()}".PHP_EOL;
 
-        $str = "NEW=false;"
+        $str .= "NEW=false;".PHP_EOL;
 
         $str .= "{$wpcli} blog create --slug='{$blogSlug}' --title='{$blogTitle}' --email='{$email}' && NEW=true".PHP_EOL;
+
+        $str .= 'echo $NEW'.PHP_EOL;
 
         $headerImageUrl = 'https://portfolios.ssis-suzhou.net/adam99999/wp-content/uploads/sites/11/2017/08/cropped-DJI_0002.jpg';
         $headerImageData = [
