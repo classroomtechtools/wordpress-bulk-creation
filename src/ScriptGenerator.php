@@ -76,15 +76,25 @@ class ScriptGenerator
 
         $str .= "{$wpcli} blog create --slug='{$blogSlug}' --title='{$blogTitle}' --email='{$email}'".PHP_EOL;
 
+        $headerImageUrl = 'https://portfolios.ssis-suzhou.net/adam99999/wp-content/uploads/sites/11/2017/08/cropped-DJI_0002.jpg';
+        $headerImageData = [
+            "attachment_id" => 12,
+            "url" => $headerImageUrl,
+            "thumbnail_url" => $headerImageUrl,
+            "height" => 215,
+            "width" => 825,
+        ];
+
         $commands = [
             "option update blogdescription \"My Blogfolio, My Learning\"",
             //"post create --user=mattives@ssis-suzhou.net --post_title='Welcome to Your Blogfolio' --post_status=publish {$firstPostPath}",
             //"post delete 2 --force",
             //"post delete 1 --force",
+            "post update 1 --post_title='Welcome to Your Blogfolio'",
             "theme activate twentytwelve",
             "theme mod set header_textcolor 515151",
-            "theme mod set header_image http://portfolios.ssis-suzhou.net/template/wp-content/uploads/sites/3/2016/08/cropped-image6149.png",
-            "theme mod set header_image_data '{\"attachment_id\":12,\"url\":\"http:\\/\\/portfolios.ssis-suzhou.net\\/template\\/wp-content\\/uploads\\/sites\\/3\\/2016\\/08\\/cropped-image6149.png\",\",thumbnail_url\":\"http:\\/\\/portfolios.ssis-suzhou.net\\/template\\/wp-content\\/uploads\\/sites\\/3\\/2016\\/08\\/cropped-image6149.png\", \"height\":215,\"width\":825}'",
+            "theme mod set header_image '{$headerImageUrl}'",
+            "theme mod set header_image_data '".json_encode($headerImageData)."'",
             "theme mod set background_color ffffff",
             "term delete category 1",
             "term create category Homeroom",
@@ -92,10 +102,10 @@ class ScriptGenerator
             "term create category Music",
             "term create category PE",
             "post term remove 3 category Uncategorized",
-            "post term add 3 category Homeroom",
-            "post term add 3 category Art",
-            "post term add 3 category Music",
-            "post term add 3 category PE",
+            "post term add 1 category Homeroom",
+            "post term add 1 category Art",
+            "post term add 1 category Music",
+            "post term add 1 category PE",
             "widget deactivate search-2",
             "widget move categories-2 --position=1",
             "widget deactivate meta-2",
