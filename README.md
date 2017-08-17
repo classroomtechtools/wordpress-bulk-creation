@@ -12,13 +12,17 @@ Edit the file `first-post.txt` with the contents of the first post on the blog.
 ### 2. Get The Input Data
 Setup an 'autosend' from PowerSchool to export all the student info.
 
-### 3. Run
+### 3. Generate the script to create blogs
 ```
-php generate.php > create-blogs.sh
-chmod +x create-blogs.sh
-./create-blogs.sh
+php generate.php
 ```
-Should be run as www-data.
+
+### 4. Run the script to create blogs
+To view the command output and log it at the same time:
+(Should be run as www-data, or whoever has permission to empty the wordpress cache directory.)
+```
+./data/create-blogs.sh | tee ./data/create-blogs.log
+```
 
 ### Note
 This needs the [wpcli](http://wp-cli.org/) installed.
