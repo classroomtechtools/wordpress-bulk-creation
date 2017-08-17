@@ -17,6 +17,11 @@ class ScriptGenerator
     private $homeRoomCalculator;
 
     /**
+     * @var Student[][]
+     */
+    private $createdFor = [];
+
+    /**
      * @param Config $config
      * @param HomeRoomCalculator $homeRoomCalculator
      */
@@ -24,6 +29,14 @@ class ScriptGenerator
     {
         $this->config = $config;
         $this->homeRoomCalculator = $homeRoomCalculator;
+    }
+
+    /**
+     * @return Student[][]
+     */
+    public function getCreatedFor()
+    {
+        return $this->createdFor;
     }
 
     /**
@@ -35,7 +48,7 @@ class ScriptGenerator
     {
         $str = '';
 
-        $createForGrades = [3, 4, 5];
+        $createForGrades = [3, 4, 5, 6];
 
         foreach ($students as $student) {
             if (!in_array($student->getGradeLevel(), $createForGrades)) {
@@ -169,6 +182,11 @@ class ScriptGenerator
             ." --first_name='{$student->getFirstName()}'"
             ." --last_name='{$student->getLastName()}'"
             ." --display_name='{$student->getFirstName()}'".PHP_EOL;
+
+        $this->createdFor[] = [
+            'student' => $student,
+            'url' => $blogUrl
+        ];
 
         return $str;
     }

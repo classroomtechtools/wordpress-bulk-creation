@@ -24,6 +24,21 @@ class Config
     /**
      * @var string
      */
+    private $outputIndexCsv;
+
+    /**
+     * @var string
+     */
+    private $outputIndexHtml;
+
+    /**
+     * @var string
+     */
+    private $outputScript;
+
+    /**
+     * @var string
+     */
     private $wordpressCliBin = '/usr/local/bin/wp';
 
     /**
@@ -48,6 +63,7 @@ class Config
             'studentsInputFile',
             'staffInputFile',
             'elementaryScheduleInputFile',
+            'outputScript',
         ];
 
         foreach ($requiredValues as $requiredValue) {
@@ -85,6 +101,30 @@ class Config
     public function getElementaryScheduleInputFile()
     {
         return $this->elementaryScheduleInputFile;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOutputIndexCsv()
+    {
+        return $this->outputIndexCsv;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOutputIndexHtml()
+    {
+        return $this->outputIndexHtml;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOutputScript()
+    {
+        return $this->outputScript;
     }
 
     /**
