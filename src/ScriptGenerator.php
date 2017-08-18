@@ -180,7 +180,7 @@ class ScriptGenerator
 
         $homeRoomTeacher = $this->homeRoomCalculator->getHomeRoomTeacherForStudent($student);
         if ($homeRoomTeacher) {
-            $str .= '($NEW || $ALWAYS_ENROL_HR_TEACHER)'." && {$wpcli} --url={$blogUrl} user set-role {$homeRoomTeacher->getEmail()} author";
+            $str .= '($NEW || $ALWAYS_ENROL_HR_TEACHER)'." && {$wpcli} --url={$blogUrl} user set-role {$homeRoomTeacher->getEmail()} author".PHP_EOL;
         }
 
         // Fix usernames while we're at it.
