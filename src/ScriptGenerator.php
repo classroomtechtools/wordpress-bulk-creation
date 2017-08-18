@@ -101,12 +101,7 @@ class ScriptGenerator
             "plugin activate subscribe2",
         ];
 
-        $homeRoomTeacher = $this->homeRoomCalculator->getHomeRoomTeacherForStudent($student);
-        if ($homeRoomTeacher) {
-            $alwaysCommands[] = "user set-role {$homeRoomTeacher->getEmail()} author";
-        }
-
-        $replectionPromptsSrc = dirname(__DIR__)."/templates/reflection-prompts.txt";
+        $reflectionPromptsSrc = dirname(__DIR__)."/templates/reflection-prompts.txt";
 
         $headerImageUrl = 'https://portfolios.ssis-suzhou.net/adam99999/wp-content/uploads/sites/11/2017/08/cropped-DJI_0002.jpg';
         $headerImageData = [
@@ -124,7 +119,7 @@ class ScriptGenerator
             "option update blogdescription \"My Blogfolio, My Learning\"",
 
             // Should be post 3
-            "post create --post_type='page' --post_title='Reflection Prompts' {$replectionPromptsSrc} --post_status='publish' --post_name='reflection-prompts'",
+            "post create --post_type='page' --post_title='Reflection Prompts' {$reflectionPromptsSrc} --post_status='publish' --post_name='reflection-prompts'",
 
             // Delete the 'Sample Page'
             "post delete 2 --force",
@@ -175,6 +170,17 @@ class ScriptGenerator
 
         foreach ($newCommands as $command) {
             $str .= '$NEW'." && {$wpcli} --url={$blogUrl} {$command}".PHP_EOL;
+        }
+
+        // Enrol the homeroom teacher on new blogs, or ensure they are enrolled on all blogs not for grade 6s.
+        $str .= "ALWAYS_ENROL_HR_TEACHER=true".PHP_EOL;
+        if ($student->getGradeLevel() >= 6) {
+            $str .= "ALWAYS_ENROL_HR_TEACHER=false";
+        }
+
+        $homeRoomTeacher = $this->homeRoomCalculator->getHomeRoomTeacherForStudent($student);
+        if ($homeRoomTeacher) {
+            $str .= '($NEW || $ALWAYS_ENROL_HR_TEACHER)'." && {$wpcli} --url={$blogUrl} user set-role {$homeRoomTeacher->getEmail()} author";
         }
 
         // Fix usernames while we're at it.

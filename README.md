@@ -7,8 +7,6 @@ A utility to read a CSV export of students from PowerSchool and create Wordpress
 ### 1. Configuration
 Edit  `config.php` as appropriate.
 
-Edit the file `first-post.txt` with the contents of the first post on the blog.
-
 ### 2. Get The Input Data
 Setup an 'autosend' from PowerSchool to export all the student info.
 
