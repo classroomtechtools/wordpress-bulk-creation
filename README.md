@@ -15,6 +15,11 @@ Setup an 'autosend' from PowerSchool to export all the student info.
 php generate.php
 ```
 
+The first time the script is created you need to make it executable
+```
+chmod +x ./data/create-blogs.sh
+```
+
 ### 4. Run the script to create blogs
 To view the command output and log it at the same time:
 (Should be run as www-data, or whoever has permission to empty the wordpress cache directory.)
