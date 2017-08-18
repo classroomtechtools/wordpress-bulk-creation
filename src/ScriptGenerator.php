@@ -99,6 +99,7 @@ class ScriptGenerator
             "option set category_base category",
             "option set tag_base '/tag'",
             "plugin activate subscribe2",
+            "option update blogdescription \"My Blogfolio, My Learning\"",
         ];
 
         $reflectionPromptsSrc = dirname(__DIR__)."/templates/reflection-prompts.txt";
@@ -116,7 +117,6 @@ class ScriptGenerator
 
         // Only run these commands on newly created blogs.
         $newCommands = [
-            "option update blogdescription \"My Blogfolio, My Learning\"",
 
             // Should be post 3
             "post create --post_type='page' --post_title='Reflection Prompts' {$reflectionPromptsSrc} --post_status='publish' --post_name='reflection-prompts'",
