@@ -73,7 +73,7 @@ class ScriptGenerator
         $email = $student->getEmail() ?: $student->getPowerSchoolId().'@mail.ssis-suzhou.net';
         $nameSlug = strtolower(str_replace(' ', '', $student->getFirstName()));
 
-        $blogTitle = "{$student->getFirstName()} {$student->getLastName()}";
+        $blogTitle = "{$student->getFirstName()}";
         $blogSlug = $nameSlug.$student->getPowerSchoolId();
         $blogUrl = $this->config->getWordpressUrl().$blogSlug;
 
